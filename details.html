@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📄 تفاصيل المحتوى</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="movies.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background-color: #111;
+      color: white;
+    }
+
+    header {
+      background-color: #000;
+      padding: 15px 20px;
+      border-bottom: 1px solid #222;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      color: #e50914;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .details-wrapper {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .details-card {
+      background: linear-gradient(to bottom right, #1a1a1a, #111);
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .details-poster {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    .details-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .details-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #e50914;
+      margin-bottom: 10px;
+    }
+
+    .details-description {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .watch-btn {
+      display: inline-block;
+      background-color: #e50914;
+      color: white;
+      font-size: 17px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(229, 9, 20, 0.5);
+      align-self: start;
+    }
+
+    .watch-btn:hover {
+      background-color: #ff1f3d;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      .details-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .details-content {
+        align-items: center;
+      }
+
+      .watch-btn {
+        align-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-container">
+      <h1 class="logo">🎬 Zengo Movies</h1>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">🏠 الرئيسية</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="details-wrapper">
+    <div class="details-card" id="details">
+      <p>📡 جاري التحميل...</p>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const container = document.getElementById("details");
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const movie = movies.find(m => m.id === id);
+
+      if (!movie) {
+        container.innerHTML = `<p>📛 لم يتم العثور على المحتوى المطلوب.</p>`;
+        return;
+      }
+
+      const isSeries = !!movie.seasons;
+
+      container.innerHTML = `
+        <img src="${movie.image}" alt="${movie.title}" class="details-poster">
+        <div class="details-content">
+          <h1 class="details-title">${movie.title}</h1>
+          <p class="details-description">${movie.description}</p>
+          <a class="watch-btn" href="${isSeries ? `series.html?id=${movie.id}` : `watch.html?id=${movie.id}`}">▶️ مشاهدة الآن</a>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎬 Zingo Movies</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="movies.js" defer></script>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px #000;
+    }
+
+    .logo {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      background-color: #333;
+      display: none;
+      flex-direction: column;
+      top: 100%;
+      right: 0;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: flex;
+    }
+
+    .search-bar {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .search-bar input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 20px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .category-buttons {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .category-buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .category-buttons button:hover {
+      background-color: #ff3c00;
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .movie-card {
+      background-color: #222;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .movie-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .movie-card h3 {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .watch-btn {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 6px 12px;
+      background-color: #ff3c00;
+      color: #fff;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    footer {
+      background-color: #1f1f1f;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      color: #aaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <h1 class="logo">🎬 Zingo Movies</h1>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li class="dropdown">
+            <a href="#categories">التصنيفات ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#" onclick="renderByCategory('action')">أكشن</a></li>
+              <li><a href="#" onclick="renderByCategory('horror')">رعب</a></li>
+              <li><a href="#" onclick="renderByCategory('anime')">أنمي</a></li>
+              <li><a href="#" onclick="renderByCategory('drama')">دراما</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">اتصل بنا</a></li>
+          <li><a href="#favorites">⭐ المفضلة</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="🔍 ابحث عن فيلم...">
+    </div>
+  </header>
+
+  <div class="category-buttons">
+    <button onclick="renderAll()">📁 الكل</button>
+    <button onclick="renderByCategory('foreign')">🎬 أفلام أجنبية</button>
+    <button onclick="renderByCategory('arabic')">🎬 أفلام عربية</button>
+    <button onclick="renderByCategory('series')">📺 مسلسلات</button>
+    <button onclick="renderByCategory('anime')">🌸 أنمي</button>
+  </div>
+
+  <main>
+    <section class="movie-grid" id="movie-list"></section>
+  </main>
+
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2025 - Zingo Movies</p>
+  </footer>
+
+  <script>
+    const container = document.getElementById("movie-list");
+    const searchInput = document.getElementById("searchInput");
+
+    function renderAll() {
+      container.innerHTML = '';
+      movies.forEach(movie => {
+        const card = createMovieCard(movie);
+        container.appendChild(card);
+      });
+    }
+
+    function renderByCategory(cat) {
+      container.innerHTML = '';
+      movies.filter(m => m.category === cat).forEach(movie => {
+        const card = createMovieCard(movie);
+        container.appendChild(card);
+      });
+    }
+
+    function createMovieCard(movie) {
+      const card = document.createElement("div");
+      card.className = "movie-card";
+      const targetLink = `details.html?id=${movie.id}`;
+      card.innerHTML = `
+        <a href="${targetLink}">
+          <img src="${movie.image}" alt="${movie.title}">
+          <h3>${movie.title}</h3>
+        </a>
+        <a class="watch-btn" href="${targetLink}">تفاصيل</a>
+      `;
+      return card;
+    }
+
+    searchInput.addEventListener("input", () => {
+      const term = searchInput.value.trim().toLowerCase();
+      container.innerHTML = '';
+      movies.filter(m => m.title.toLowerCase().includes(term)).forEach(movie => {
+        const card = createMovieCard(movie);
+        container.appendChild(card);
+      });
+    });
+
+    // ▶ عرض جميع الأعمال عند تحميل الصفحة
+    window.onload = renderAll;
+  </script>
+</body>
+</html>

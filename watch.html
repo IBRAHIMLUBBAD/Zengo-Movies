@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎬 Zingo Watch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="movies.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #111;
+      color: white;
+    }
+    header {
+      background-color: #000;
+      padding: 15px 20px;
+      border-bottom: 1px solid #222;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(229, 9, 20, 0.6);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 12px rgba(255, 0, 0, 0.9);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(229, 9, 20, 0.6);
+  }
+}
+
+.logo {
+  font-size: 40px;
+  font-weight: 800;
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  color: #e50914;
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #e50914, #ff4e50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 5px rgba(229, 9, 20, 0.7);
+  cursor: pointer;
+  animation: 
+    fadeInSlide 0.8s ease-in-out both,
+    pulse 4s ease-in-out infinite 2s;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.08);
+  text-shadow: 0 0 15px rgba(255, 0, 0, 1);
+}
+
+
+/* ✅ روابط التصفح (Nav Links) محسّنة بذكاء */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  right: 10px;
+  width: 0;
+  height: 2px;
+  background-color: #e50914;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(229, 9, 20, 0.1);
+  color: #e50914;
+}
+
+.nav-links a:hover::after {
+  width: 60%;
+}
+
+    .video-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin: 30px auto;
+      padding: 10px;
+      max-width: 1200px;
+    }
+    .video-player {
+      flex: 2;
+      background-color: #000;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      padding: 10px;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 12px;
+    }
+    .episode-title {
+      text-align: center;
+      font-size: 22px;
+      margin: 20px 0 10px;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+/* ✅ زر التحكم الاحترافي فائق التطور */
+.control-btn {
+  background: linear-gradient(135deg, #e50914, #b20710);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(229, 9, 20, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  transform: skewX(-20deg);
+  transition: 0.5s;
+}
+
+.control-btn:hover::before {
+  left: 125%;
+}
+
+.control-btn:hover {
+  background: linear-gradient(135deg, #52bce7, #3699cc);
+  box-shadow: 0 6px 20px rgba(82, 188, 231, 0.45);
+  color: #fff;
+}
+
+    .sidebar {
+      flex: 1;
+      max-height: 540px;
+      overflow-y: auto;
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .episode-btn {
+      width: 100%;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      text-align: right;
+      transition: background 0.3s;
+    }
+    .episode-btn:hover {
+      background-color: #e50914;
+    }
+    .season-select-container {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      text-align: right;
+      transition: background 0.3s;
+    }
+    .season-select {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      padding: 10px 14px;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 5px;
+      transition: background 0.3s;
+    }
+    .season-select:hover {
+      background-color: #e50914;
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      margin-bottom: 15px;
+      background-color: #111;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <h1 class="logo">🎬 Zingo Movies</h1>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a id="backToDetails">🔙 العودة للتفاصيل</a></li>
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="season-select-container" id="seasonSelectContainer"></div>
+
+  <div class="video-container" id="video-section">
+    <div class="video-player">
+      <p class="episode-title">جارٍ التحميل...</p>
+      <iframe id="video-frame" src="" allowfullscreen></iframe>
+      <div class="controls" id="controls">
+        <button id="prevButton" class="control-btn">⏮️ الحلقة السابقة</button>
+        <button id="nextButton" class="control-btn">⏭️ الحلقة التالية</button>
+      </div>
+    </div>
+    <div class="sidebar">
+      <input type="text" placeholder="🔍 ابحث عن حلقة..." class="search-input" id="searchInput" />
+      <div id="episodeList"></div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    document.getElementById("backToDetails").href = `details.html?id=${id}`;
+
+    const url = new URLSearchParams(window.location.search);
+    const s = url.get("s");
+    const e = url.get("e");
+
+    const videoFrame = document.getElementById("video-frame");
+    const titleElement = document.querySelector(".episode-title");
+    const episodeList = document.getElementById("episodeList");
+    const seasonSelectContainer = document.getElementById("seasonSelectContainer");
+    const searchInput = document.getElementById("searchInput");
+    const nextButton = document.getElementById("nextButton");
+    const prevButton = document.getElementById("prevButton");
+    const controls = document.getElementById("controls");
+
+    const movie = movies.find(m => m.id === id);
+
+    if (!movie) {
+      document.getElementById("video-section").innerHTML = '<p style="text-align:center">📛 لم يتم العثور على المحتوى.</p>';
+    } else if (movie.type === "movie") {
+      // 🎥 فيلم - عرض مباشر بدون حلقات
+      titleElement.textContent = movie.title;
+      videoFrame.src = movie.embed;
+      episodeList.style.display = "none";
+      seasonSelectContainer.style.display = "none";
+      searchInput.style.display = "none";
+      if (controls) controls.style.display = "none";
+    } else {
+      // 📺 مسلسل أو أنمي
+      let currentSeason = +s || 0;
+      let currentEpisode = +e || 0;
+
+      function updateEpisode(seasonIndex, episodeIndex) {
+        const episode = movie.seasons[seasonIndex].episodes[episodeIndex];
+        videoFrame.src = episode.embed;
+        titleElement.textContent = `${movie.title} - ${episode.title}`;
+        currentSeason = seasonIndex;
+        currentEpisode = episodeIndex;
+        renderEpisodeButtons(seasonIndex);
+      }
+
+      function renderEpisodeButtons(seasonIndex, filter = '') {
+        episodeList.innerHTML = '';
+        movie.seasons[seasonIndex].episodes.forEach((ep, idx) => {
+          if (ep.title.includes(filter)) {
+            const btn = document.createElement("button");
+            btn.className = "episode-btn";
+            btn.textContent = ep.title;
+            btn.onclick = () => updateEpisode(seasonIndex, idx);
+            episodeList.appendChild(btn);
+          }
+        });
+      }
+
+      function renderSeasonSelect() {
+        if (movie.seasons.length <= 1) return;
+        seasonSelectContainer.innerHTML = '';
+        movie.seasons.forEach((season, index) => {
+          const btn = document.createElement("button");
+          btn.className = "season-select";
+          btn.textContent = `الموسم ${index + 1}`;
+          btn.onclick = () => updateEpisode(index, 0);
+          seasonSelectContainer.appendChild(btn);
+        });
+      }
+
+      searchInput.addEventListener("input", () => {
+        const filter = searchInput.value.trim();
+        renderEpisodeButtons(currentSeason, filter);
+      });
+
+      nextButton.addEventListener("click", () => {
+        const nextIndex = currentEpisode + 1;
+        if (movie.seasons[currentSeason].episodes[nextIndex]) {
+          updateEpisode(currentSeason, nextIndex);
+        } else {
+          alert("📛 لا توجد حلقة تالية!");
+        }
+      });
+
+      prevButton.addEventListener("click", () => {
+        const prevIndex = currentEpisode - 1;
+        if (movie.seasons[currentSeason].episodes[prevIndex]) {
+          updateEpisode(currentSeason, prevIndex);
+        } else {
+          alert("📛 هذه أول حلقة!");
+        }
+      });
+
+      renderSeasonSelect();
+      updateEpisode(currentSeason, currentEpisode);
+    }
+  </script>
+</body>
+</html>
