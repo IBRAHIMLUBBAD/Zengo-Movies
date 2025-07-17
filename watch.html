@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <link rel="stylesheet" href="mobile.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎬 Zingo Watch</title>
@@ -110,6 +111,11 @@
 .nav-links a:hover {
   background-color: rgba(229, 9, 20, 0.1);
   color: #e50914;
+}
+.episode-btn.active-episode {
+  background-color: #e50914;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
 }
 
 .nav-links a:hover::after {
@@ -251,10 +257,13 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container header-container">
-      <h1 class="logo">🎬 Zingo watch</h1>
+    <h1 class="logo">
+      <a href="index.html" style="text-decoration: none; color: inherit;">🎬 Zingo watch</a>
+      </h1>
       <nav class="navbar">
         <ul class="nav-links">
           <li><a href="index.html">الرئيسية</a></li>
@@ -317,27 +326,35 @@
       let currentSeason = +s || 0;
       let currentEpisode = +e || 0;
 
-      function updateEpisode(seasonIndex, episodeIndex) {
-        const episode = movie.seasons[seasonIndex].episodes[episodeIndex];
-        videoFrame.src = episode.embed;
-        titleElement.textContent = `${movie.title} - ${episode.title}`;
-        currentSeason = seasonIndex;
-        currentEpisode = episodeIndex;
-        renderEpisodeButtons(seasonIndex);
+function updateEpisode(seasonIndex, episodeIndex) {
+  const episode = movie.seasons[seasonIndex].episodes[episodeIndex];
+  videoFrame.src = episode.embed;
+  titleElement.textContent = `${movie.title} - ${episode.title}`;
+  document.title = `🎬 ${movie.title} | ${episode.title}`;
+  currentSeason = seasonIndex;
+  currentEpisode = episodeIndex;
+  renderEpisodeButtons(seasonIndex);
+}
+
+function renderEpisodeButtons(seasonIndex, filter = '') {
+  episodeList.innerHTML = '';
+  movie.seasons[seasonIndex].episodes.forEach((ep, idx) => {
+    if (ep.title.includes(filter)) {
+      const btn = document.createElement("button");
+      btn.className = "episode-btn";
+      btn.textContent = ep.title;
+
+      // إذا كانت هذه هي الحلقة المشغلة حاليًا، أضف كلاس مميز
+      if (idx === currentEpisode && seasonIndex === currentSeason) {
+        btn.classList.add("active-episode");
       }
 
-      function renderEpisodeButtons(seasonIndex, filter = '') {
-        episodeList.innerHTML = '';
-        movie.seasons[seasonIndex].episodes.forEach((ep, idx) => {
-          if (ep.title.includes(filter)) {
-            const btn = document.createElement("button");
-            btn.className = "episode-btn";
-            btn.textContent = ep.title;
-            btn.onclick = () => updateEpisode(seasonIndex, idx);
-            episodeList.appendChild(btn);
-          }
-        });
-      }
+      btn.onclick = () => updateEpisode(seasonIndex, idx);
+      episodeList.appendChild(btn);
+    }
+  });
+}
+
 
       function renderSeasonSelect() {
         if (movie.seasons.length <= 1) return;
@@ -377,18 +394,6 @@
       renderSeasonSelect();
       updateEpisode(currentSeason, currentEpisode);
     }
-    
-  const adUrl = "https://www.profitableratecpm.com/nm0he4ye7e?key=3e62704ee3934f30342774d34220fdb5";
-
-  document.getElementById("prevButton").addEventListener("click", function () {
-    window.open(adUrl, "_blank");
-    // هنا يمكنك إضافة كود التنقل للحلقة السابقة بعد الإعلان إذا أردت
-  });
-
-  document.getElementById("nextButton").addEventListener("click", function () {
-    window.open(adUrl, "_blank");
-    // هنا يمكنك إضافة كود التنقل للحلقة التالية بعد الإعلان إذا أردت
-  });
 
 
   </script>
