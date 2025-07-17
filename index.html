@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <link rel="stylesheet" href="mobile.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎬 Zingo watch</title>
-  <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/dc/e2/4e/dce24e1753323e14dc6b39527dc53e32.jpg">
-
   <link rel="stylesheet" href="style.css">
   <script src="movies.js" defer></script>
   <style>
+
     body {
       font-family: 'Tahoma', sans-serif;
       background-color: #111;
@@ -19,7 +19,7 @@
     header {
       background-color: #1f1f1f;
       padding: 20px 10px;
-      position: sticky;
+      position: relative;
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 5px #000;
@@ -66,18 +66,33 @@
       display: flex;
     }
 
-    .search-bar {
-      margin-top: 10px;
-      text-align: center;
-    }
+.search-bar {
+  padding: 0;
+  margin: 0;
+  background: none; /* إزالة الخلفية */
+  border: none;
+  text-align: center;
+}
 
-    .search-bar input {
-      width: 80%;
-      padding: 10px;
-      border-radius: 20px;
-      border: none;
-      font-size: 16px;
-    }
+.search-bar input {
+  width: 80%;
+  max-width: 500px;
+  padding: 8px 15px;
+  border-radius: 25px;
+  border: 1px solid #444;
+  background-color: #111;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+  margin-top: 10px; /* تباعد بسيط تحت الشعار */
+}
+
+.search-bar input:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.5);
+}
+
 
     .category-buttons {
       text-align: center;
@@ -146,38 +161,65 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="container header-container">
-      <h1 class="logo">🎬 Zingo watch</h1>
-      <nav class="navbar">
-        <ul class="nav-links">
-          <li><a href="index.html">الرئيسية</a></li>
-          <li class="dropdown">
-            <a href="#categories">التصنيفات ▾</a>
-            <ul class="dropdown-menu">
-              <li><a href="#" onclick="renderByCategory('action')">أكشن</a></li>
-              <li><a href="#" onclick="renderByCategory('horror')">رعب</a></li>
-              <li><a href="#" onclick="renderByCategory('anime')">أنمي</a></li>
-              <li><a href="#" onclick="renderByCategory('drama')">دراما</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">اتصل بنا</a></li>
-          <li><a href="#favorites">⭐ المفضلة</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="🔍 ابحث عن فيلم...">
-    </div>
-  </header>
+<header>
 
-  <div class="category-buttons">
-    <button onclick="renderAll()">📁 الكل</button>
-    <button onclick="renderByCategory('foreign')">🎬 أفلام أجنبية</button>
-    <button onclick="renderByCategory('arabic')">🎬 أفلام عربية</button>
-    <button onclick="renderByCategory('series')">📺 مسلسلات</button>
-    <button onclick="renderByCategory('anime')">🌸 أنمي</button>
+  <div class="container header-container">
+    <h1 class="logo">
+      <a href="index.html" style="text-decoration: none; color: inherit;">🎬 Zingo watch</a>
+    </h1>
+      <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 ابحث عن فيلم...">
   </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li class="dropdown">
+        </li>
+        <li><a href="#contact">اتصل بنا</a></li>
+        <li><a href="#favorites">⭐ المفضلة</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<div class="category-buttons">
+  <button onclick="renderAll()">📁 الكل</button>
+
+  <div class="dropdown">
+    <button>🎬 أفلام أجنبية ▾</button>
+    <div class="dropdown-menu">
+      <button onclick="renderByCategory('action')">أكشن</button>
+      <button onclick="renderByCategory('horror')">رعب</button>
+      <button onclick="renderByCategory('drama')">دراما</button>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>🎬 أفلام عربية ▾</button>
+    <div class="dropdown-menu">
+      <button onclick="renderByCategory('arabic-drama')">دراما</button>
+      <button onclick="renderByCategory('arabic-comedy')">كوميديا</button>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>📺 مسلسلات ▾</button>
+    <div class="dropdown-menu">
+      <button onclick="renderByCategory('series-us')">أمريكية</button>
+      <button onclick="renderByCategory('series-tr')">تركية</button>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button>🌸 أنمي ▾</button>
+    <div class="dropdown-menu">
+      <button onclick="renderByCategory('anime-shonen')">شونين</button>
+      <button onclick="renderByCategory('anime-romance')">رومانسي</button>
+    </div>
+  </div>
+</div>
+
 
   <main>
     <section class="movie-grid" id="movie-list"></section>
