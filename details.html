@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <link rel="stylesheet" href="mobile.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>📄 تفاصيل المحتوى</title>
@@ -28,7 +29,7 @@
     }
 
     .logo {
-      font-size: 26px;
+      font-size: 40px;
       color: #e50914;
       font-weight: 800;
       margin: 0;
@@ -128,6 +129,8 @@
       .watch-btn {
         align-self: center;
       }
+
+      
     }
   </style>
 </head>
@@ -135,7 +138,9 @@
 
   <header>
     <div class="container header-container">
-      <h1 class="logo">🎬 Zengo watch</h1>
+    <h1 class="logo">
+      <a href="index.html" style="text-decoration: none; color: inherit;">🎬 Zingo watch</a>
+      </h1>
       <nav class="navbar">
         <ul class="nav-links">
           <li><a href="index.html">🏠 الرئيسية</a></li>
@@ -143,38 +148,70 @@
       </nav>
     </div>
   </header>
-<iframe data-aa='2402765' src='//ad.a-ads.com/2402765?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
   <main class="details-wrapper">
     <div class="details-card" id="details">
       <p>📡 جاري التحميل...</p>
     </div>
   </main>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    const container = document.getElementById("details");
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const container = document.getElementById("details");
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const movie = movies.find(m => m.id === id);
+  document.addEventListener("DOMContentLoaded", () => {
+    const movie = movies.find(m => m.id === id);
 
-      if (!movie) {
-        container.innerHTML = `<p>📛 لم يتم العثور على المحتوى المطلوب.</p>`;
-        return;
-      }
+    if (!movie) {
+      container.innerHTML = `<p>📛 لم يتم العثور على المحتوى المطلوب.</p>`;
+      return;
+    }
 
-      const isSeries = !!movie.seasons;
+    const isSeries = !!movie.seasons;
 
-      container.innerHTML = `
-        <img src="${movie.image}" alt="${movie.title}" class="details-poster">
-        <div class="details-content">
-          <h1 class="details-title">${movie.title}</h1>
-          <p class="details-description">${movie.description}</p>
-          <a class="watch-btn" href="${isSeries ? `series.html?id=${movie.id}` : `watch.html?id=${movie.id}`}">▶️ مشاهدة الآن</a>
+    const genres = movie.genres ? movie.genres.join(', ') : 'غير محدد';
+    const status = movie.status === 'completed' ? 'مكتمل' : 'مستمر';
+    const seasonStatus = movie.seasonStatus === 'completed' ? 'الموسم مكتمل' : 'الموسم مستمر';
+    const rating = movie.rating ? `${movie.rating}/10 ⭐` : 'غير مصنّف';
+    const releaseYear = movie.releaseYear || 'غير معروف';
+
+    // HTML الرئيسي
+    let html = `
+      <img src="${movie.image}" alt="${movie.title}" class="details-poster">
+      <div class="details-content">
+        <h1 class="details-title">${movie.title}</h1>
+        <p class="details-description">${movie.description || "لا يوجد وصف متاح."}</p>
+
+        <ul style="list-style:none; padding: 0; margin: 20px 0; color: #aaa; font-size: 16px;">
+          <li><strong>📅 سنة الإصدار:</strong> ${releaseYear}</li>
+          <li><strong>📺 الحالة:</strong> ${status}</li>
+          <li><strong>📌 حالة الموسم:</strong> ${seasonStatus}</li>
+          <li><strong>🌟 التقييم:</strong> ${rating}</li>
+          <li><strong>🎭 النوع:</strong> ${genres}</li>
+        </ul>
+
+        <a class="watch-btn" href="${isSeries ? `series.html?id=${movie.id}` : `watch.html?id=${movie.id}`}">▶️ مشاهدة الآن</a>
+      </div>
+    `;
+
+    // عرض التريلر إن وجد
+    if (movie.embed) {
+      html += `
+        <div class="trailer-section" style="margin-top: 30px;">
+          <h2 style="color: #fff; font-size: 22px;">🎬 الإعلان التشويقي</h2>
+          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius: 12px; box-shadow: 0 0 10px #000;">
+            <iframe src="${movie.embed}" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+          </div>
         </div>
       `;
-    });
-  </script>
+    }
+
+    container.innerHTML = html;
+  });
+</script>
+
+
 
 </body>
 </html>
