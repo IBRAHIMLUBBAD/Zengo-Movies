@@ -1,5 +1,234 @@
 const movies = [
   {
+    id: 'Tokyo-Ghoul',
+    title: 'Tokyo Ghoul',
+    image: 'https://i.pinimg.com/736x/17/bc/37/17bc37c878680ec3f5fbcd0b12236b0f.jpg',
+    embed: 'https://www.youtube.com/embed/UUeqpuZobBw?si=V4lPOuo644IKEfzE', 
+    category: 'anime',
+    releaseYear: 2014,
+    status: 'completed', 
+    seasonStatus: 'completed', 
+    rating: 8.3, 
+    type: 'TV',
+    genres: ['أكشن', 'دموي', 'تشويق'],
+    description:'تدور القصة في مدينة طوكيو التي تنتشر فيها مخلوقات غامضة تُعرف باسم “الغيلان”. هذه المخلوقات تتغذى على لحم البشر، مما يجعلهم مصدر خوف ورعب للسكان. كانيكي كين، شابٌ في الثامنة عشرة من عمره، يدرس في الجامعة، ويعيش حياةً عاديةً. ذات يوم، يلتقي بفتاةٍ جميلةٍ تُدعى ريزي في أحد المقاهي المفضلة لديه. يتشاركان نفس العمر والاهتمامات، مما يخلق شعورًا بالانسجام بينهما. ولكن، سرعان ما تنقلب الأمور رأسًا على عقب عندما يكتشف كانيكي أن ريزي هي في الواقع غولة. تتعرض حياته للخطر عندما تهاجمه، لكنه ينجو بأعجوبة بينما تلقى ريزي حتفها. تُنقذ حياة كانيكي بفضل عملية نقل أعضاء من ريزي إلى جسده. لكن هذه العملية تُغير حياته إلى الأبد، حيث يصبح هجينًا فريدًا من نوعه، يجمع بين خصائص البشر والغيلان.',
+    seasons: [
+      {
+        seasonNumber: 1,
+        episodes: [
+
+		{
+            title: 'الحلقة 1',
+            embed: 'https://mega.nz/embed/bd8xFJDJ#RUG8kXfbxbe4JC1eJ89MD-ZZ2cFclyoiYzn4xiP-l-o'
+          },
+		{
+            title: 'الحلقة 2',
+            embed: 'https://mega.nz/embed/rFdnTT7C#kZRkBc5u1JGrti4d08A1FI8VVzoXuQiatUWaTaFgR9w'
+          },
+		{
+            title: 'الحلقة 4',
+            embed: 'https://mega.nz/embed/GQtFmBZZ#-LgCdtJnILLRVQbXoLSsJ6v5dgcXtMK4z8iWj712Q_Y'
+          },
+		{
+            title: 'الحلقة 5',
+            embed: 'https://mega.nz/embed/6MEzXJoY#rgTq1Cah5DfC20KmdqwNNcX7QhKmK2xXVOqp22HFGRo'
+          },
+		{
+            title: 'الحلقة 6',
+            embed: 'https://mega.nz/embed/HAVAkAAY#4e3ISEAkJDywDgsxMA5ZOBxtHkWvOsxHPpfSnORLk1g'
+          },
+		{
+            title: 'الحلقة 7',
+            embed: 'https://mega.nz/embed/iYURmbRR#ThH0sXHpvqRaNLop7DPlM3czFA_hsCDcz6VNAb5hAQA'
+          },
+		{
+            title: 'الحلقة 8',
+            embed: 'https://mega.nz/embed/nd0VBLob#LfhrJJlDEaxa1vM9X7RdOh4BGsTSBDaJUf8Vom8M4BA'
+          },
+		{
+            title: 'الحلقة 9',
+            embed: 'https://mega.nz/embed/6NMSQDoS#LpqhL9iuJze9O_msJdhkIeBx018vIUuL5mGzeOYtHuI'
+          },
+		{
+            title: 'الحلقة 10',
+            embed: 'https://mega.nz/embed/CIF0WaYK#PoGeQFcxBAzVAtbJbHVhC2jYa4Yh8Rw5DQaKEPNE8BQ'
+          },
+		{
+            title: 'الحلقة 11',
+            embed: 'https://mega.nz/embed/rRcDRKjT#o_hJJ6zpSb0QDZwwS4sci_5e91NOjTNaxRrFzEIrASI'
+          },
+		{
+            title: 'الحلقة 12',
+            embed: 'https://mega.nz/embed/eM1TWIpR#sBE8EJ930yIy-fKi6FirYCiU7Zyzxu4cs1iZbkOB2dQ'
+          },
+        ]
+      
+      },
+      {
+        seasonNumber: 2,
+        episodes: [
+		{
+            title: 'الحلقة 1',
+            embed: 'https://mega.nz/embed/KF9SkQBT#gPtr25vsrTaJn09zcsBfxqDbh7X3F45c2rKAMjjfBsg'
+          },
+		{
+            title: 'الحلقة 2',
+            embed: 'https://mega.nz/embed/SdMQXaAY#S10FTaCjhOlE3IVLQ5x1L1fv2c9uSi13H99BX2JDk7M'
+          },
+		{
+            title: 'الحلقة 3',
+            embed: 'https://mega.nz/embed/DFFnyDqI#DP9q4G8da4J6yk5g9PlIHOI8HjgRdapIIgPwY3EpenE'
+          },
+		{
+            title: 'الحلقة 4',
+            embed: 'https://mega.nz/embed/rVUWQDJJ#DcMYrZS1vTFVoIQWIgahcHXsgYRU_lMHsxriT9kBAqw'
+          },
+		{
+            title: 'الحلقة 5',
+            embed: 'https://mega.nz/embed/7dkFnSyR#ZfhGpVjqb0mnXFHsds9m31mSZOuX4F7bHppv4qvsKyU'
+          },
+		{
+            title: 'الحلقة 6',
+            embed: 'https://mega.nz/embed/3cFhhCzR#gzK0ubbKxdlncH5A4vSPkqtpIJll0PApY2l8Ys1mjVU'
+          },
+		{
+            title: 'الحلقة 7',
+            embed: 'https://mega.nz/embed/HRFgRDaK#So_Y7gWU1WW6m94AQ0WMB9_eHf34gkp4A6apPhL9O4I'
+          },
+		{
+            title: 'الحلقة 8',
+            embed: 'https://mega.nz/embed/yNUHzBJT#PX78QhTj1oTXgNoyr2VthSLon_Uf1FqLbpRIU8XjwTY'
+          },
+		{
+            title: 'الحلقة 9',
+            embed: 'https://mega.nz/embed/mUFUxJSI#sHXVcAlUWfvOzHlWdG__dHVfXMQBcHl6Q-JC_pRT4Ik'
+          },
+		{
+            title: 'الحلقة 10',
+            embed: 'https://mega.nz/embed/GE0xVKYB#k904oodK3PNh7zqU_YhWoDoZlKyYLjVSEZxWF4KAvww'
+          },
+		{
+            title: 'الحلقة 11',
+            embed: 'https://mega.nz/embed/WEUGWDzT#a2CSB4ByO3U9_m19q6lP64shjG4ZVsKV0-9l-CRHzAc'
+          },
+		{
+            title: 'الحلقة 12',
+            embed: 'https://mega.nz/embed/DQcCAbJb#nTnPPiKZrMlsWTp-2w8R3nS3wNfXBiQe96EeN9gr_A4'
+          },
+
+
+          
+        ]
+      },
+      {
+        seasonNumber: 3,
+        episodes: [
+		{
+            title: 'الحلقة 1',
+            embed: 'https://mega.nz/embed/mQtQTLhR#_K0J6EPW1GRsjQG5z79aqLub9T9QVeLZYsIt0-QeEwg'
+          },
+		{
+            title: 'الحلقة 2',
+            embed: 'https://mega.nz/embed/PV8T0aBb#RvCJqxoLALgs_EPc3P1AWAu-zR-yw61Uqlw6Pk19pg0'
+          },
+		{
+            title: 'الحلقة 3',
+            embed: 'https://mega.nz/embed/XQ1DBKKB#-gtC8fr9QNZ2aLUuf5WwGiT88FzobWC5UPG2SzvL0H4'
+          },
+		{
+            title: 'الحلقة 4',
+            embed: 'https://mega.nz/embed/mYlyRboT#G-GW6OV13lrxXLbfz0f0vQ_1K-1zqI5828a0z2kxY0o'
+          },
+		{
+            title: 'الحلقة 5',
+            embed: 'https://mega.nz/embed/rFdD3KaB#ztajRhJ6qFpdxVukRQkoKDNC5dpW6exDno4obYuKwjE'
+          },
+		{
+            title: 'الحلقة 6',
+            embed: 'https://mega.nz/embed/SB1n3JoR#ApReEkrPplQTvZOsVN03L4z57JFJlGdbYePF-3olunk'
+          },
+		{
+            title: 'الحلقة 7',
+            embed: 'https://mega.nz/embed/mY8HHKYQ#OlnT76XpmxuXJVAzwtKJwijD5uhKLksvbXs1hEsCdx4'
+          },
+		{
+            title: 'الحلقة 8',
+            embed: 'https://mega.nz/embed/HUUi1CSY#s7AUmmM_q9IizG7bMjLKaiM_yFoGKFMyQ2HlCYBhKVg'
+          },
+		{
+            title: 'الحلقة 9',
+            embed: 'https://mega.nz/embed/bUVTHZIR#cqri8MdlLVyqnImzZ9EUy1StO5f55mNnj3ML3I-dlxU'
+          },
+		{
+            title: 'الحلقة 10',
+            embed: 'https://mega.nz/embed/XA0iGC5a#QOvs7zzgwSdH6t9vsx8_xxx219Ha5bavo96Y60ZeMr8'
+          },
+		{
+            title: 'الحلقة 11',
+            embed: 'https://mega.nz/embed/uRNn1ZDK#ga0royn4RerwRMKiAxh_daObAXdsrHwPLsn_5RVEjPQ'
+          },
+		{
+            title: 'الحلقة 12',
+            embed: 'https://mega.nz/embed/aFtzFQQa#U1Z-1kf054An38PBZKxCqHouIQK7M_S2mlBv9WOOWK4'
+          },
+        ]
+      },
+      {
+        seasonNumber: 4,
+        episodes: [
+		{
+            title: 'الحلقة 1',
+            embed: 'https://mega.nz/embed/zF0nhCSa#8YTzLCWWqtONZ1wivIwOpt1zmDy_71UQNNuwiHSArnI'
+          },
+		{
+            title: 'الحلقة 2',
+            embed: 'https://mega.nz/embed/fBsw1YLY#7Ai0hsFCulfg3SwxdSUFe1kXF-w90y4CwLJgxpPyaUQ'
+          },
+		{
+            title: 'الحلقة 3',
+            embed: 'https://mega.nz/embed/aYkGBKIJ#zUfAMhJPA6ZyxY56nRccH2OPT-wwY8Whas9HBMT4db0'
+          },
+		{
+            title: 'الحلقة 4',
+            embed: 'https://mega.nz/embed/SNcShJxJ#90bGCiZuHAJxvEvaMyRbBURZmsEcD8QqWJ7p8L7mgDo'
+          },
+		{
+            title: 'الحلقة 5',
+            embed: 'https://mega.nz/embed/LZUwiBbD#tJYgEESD6ZWMbSZt2cCui7HGu-YhxOX1sQe-_7MCR84'
+          },
+		{
+            title: 'الحلقة 6',
+            embed: 'https://mega.nz/embed/XYVmFYLJ#7vVmD6uzM9GmAxhwK0AvIKL-8a5LfRnaz_K34ALJSEc'
+          },
+		{
+            title: 'الحلقة 7',
+            embed: 'https://mega.nz/embed/6cczFQzC#4FGozfqVCFK1Xi8Y9DCSXOHQGQbA-10UYKZUhhXwKzY'
+          },
+		{
+            title: 'الحلقة 8',
+            embed: 'https://mega.nz/embed/6dM3QYpC#Fq-60-T190r02tNwMpIQYeLSMYKXlbgW3YILXTnLyWs'
+          },
+		{
+            title: 'الحلقة 9',
+            embed: 'https://mega.nz/embed/OAVwVCbJ#5tUcPxop8E62oyLNeZTUANQg0y6eh7y-x2Tql6GSyPA'
+          },
+		{
+            title: 'الحلقة 10',
+            embed: 'https://mega.nz/embed/iYUwWSJb#qN4ncEys-W1biCbIOVB1fx_I1e8NuaWK4beO5i59Wpo'
+          },
+		{
+            title: 'الحلقة 11',
+            embed: 'https://mega.nz/embed/udt0FR4K#OcKDGuHhrUpxZ5Qgej-4LX4IDSKclSbI2PHezu9LXEQ'
+          },
+		{
+            title: 'الحلقة 12',
+            embed: 'https://mega.nz/embed/CIlQjIgb#D1bB8FwnpMvQ-h75M03KnrkA2ksV90-s9ZmoUmsWVw0'
+          },
+        ]
+      }
+    ]
+},	
+  {
     id: 'vinland-saga',
     title: 'Vinland Saga',
     image: 'https://i.pinimg.com/1200x/f7/a3/a8/f7a3a819b9abd49c301bb3daa724869d.jpg',
