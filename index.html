@@ -252,28 +252,11 @@
       });
     }
 
-function createMovieCard(movie) {
-  const card = document.createElement('div');
-  card.classList.add('movie-card');
+const rating = document.createElement("div");
+rating.className = "movie-rating";
+rating.textContent = `⭐ ${movie.rating} / 10`;
+card.appendChild(rating);
 
-  const ratingOutOfFive = Math.round((movie.rating || 0) / 2);
-  let starsHtml = '';
-  for (let i = 1; i <= 5; i++) {
-    starsHtml += `<img src="${i <= ratingOutOfFive ? 'https://i.pinimg.com/1200x/f4/3e/a6/f43ea641ea90098f94e31e096d101d5b.jpg' : 'https://i.pinimg.com/1200x/b3/69/79/b36979f2d9018a26a7b49a6fb7b0a8a2.jpg'}" class="star" />`;
-  }
-
-  const ratingNumber = movie.rating ? ` <span class="rating-number">(${movie.rating.toFixed(1)})</span>` : '';
-
-  card.innerHTML = `
-    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
-    <div class="movie-info">
-      <h3 class="movie-title">${movie.title}</h3>
-      <div class="rating-stars">${starsHtml}${ratingNumber}</div>
-      <a href="details.html?id=${movie.id}" class="details-button">عرض التفاصيل</a>
-    </div>
-  `;
-  return card;
-}
 
 
     searchInput.addEventListener("input", () => {
