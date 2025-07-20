@@ -114,15 +114,14 @@
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
     }
-<style>
-  .details-info-box {
+    .details-info-box {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin: 20px 0;
-  }
+    }
 
-  .detail-item {
+    .detail-item {
     background-color: #1e1e1e;
     padding: 10px 16px;
     border-radius: 10px;
@@ -132,58 +131,54 @@
     flex: 1;
     text-align: center;
     box-shadow: 0 0 6px rgba(0,0,0,0.3);
-  }
+    }
 
-  .detail-item strong {
+    .detail-item strong {
     display: block;
     color: #ffc107;
     font-size: 14px;
     margin-bottom: 4px;
-  }
-</style>
-
-    @media (max-width: 768px) {
-      .details-card {
+    }
+@media (max-width: 768px) {
+        .details-card {
         flex-direction: column;
         align-items: center;
         text-align: center;
-      }
+        }
 
       .details-content {
         align-items: center;
       }
-.details-info-box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
-}
+      .details-info-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+        }
 
-.detail-item {
-  background-color: #1e1e1e;
-  padding: 12px 20px;
-  border-radius: 10px;
-  color: #ddd;
-  font-size: 15px;
-  min-width: 120px;
-  flex: 1;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-}
+      .detail-item {
+        background-color: #1e1e1e;
+        padding: 12px 20px;
+        border-radius: 10px;
+        color: #ddd;
+        font-size: 15px;
+        min-width: 120px;
+        flex: 1;
+        text-align: center;
+        box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        }
 
-.detail-item strong {
-  display: block;
-  color: #f0c040;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
+        .detail-item strong {
+          display: block;
+          color: #f0c040;
+          font-size: 14px;
+          margin-bottom: 4px;
+          }
 
       .watch-btn {
         align-self: center;
       }
-
-      
-    }
+}
   </style>
 </head>
 <body>
@@ -272,7 +267,7 @@
           </div>
         </div>
       `;
-    }
+    }iframe
 
     container.innerHTML = html;
   });
