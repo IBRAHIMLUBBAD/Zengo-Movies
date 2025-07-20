@@ -259,7 +259,7 @@ function createMovieCard(movie) {
   const ratingOutOfFive = Math.round((movie.rating || 0) / 2);
   let starsHtml = '';
   for (let i = 1; i <= 5; i++) {
-    starsHtml += `<img src="${i <= ratingOutOfFive ? 'https://i.imgur.com/Y7v4r7O.png' : 'https://i.imgur.com/8KxZx9x.png'}" class="star" />`;
+    starsHtml += `<img src="${i <= ratingOutOfFive ? 'https://i.pinimg.com/1200x/f4/3e/a6/f43ea641ea90098f94e31e096d101d5b.jpg' : 'https://i.pinimg.com/1200x/b3/69/79/b36979f2d9018a26a7b49a6fb7b0a8a2.jpg'}" class="star" />`;
   }
 
   const ratingNumber = movie.rating ? ` <span class="rating-number">(${movie.rating.toFixed(1)})</span>` : '';
