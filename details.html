@@ -125,6 +125,31 @@
       .details-content {
         align-items: center;
       }
+.details-info-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  background-color: #1e1e1e;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: #ddd;
+  font-size: 15px;
+  min-width: 120px;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.detail-item strong {
+  display: block;
+  color: #f0c040;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
 
       .watch-btn {
         align-self: center;
@@ -183,13 +208,28 @@
         <h1 class="details-title">${movie.title}</h1>
         <p class="details-description">${movie.description || "لا يوجد وصف متاح."}</p>
 
-        <ul style="list-style:none; padding: 0; margin: 20px 0; color: #aaa; font-size: 16px;">
-          <li><strong>📅 سنة الإصدار:</strong> ${releaseYear}</li>
-          <li><strong>📺 الحالة:</strong> ${status}</li>
-          <li><strong>📌 حالة الموسم:</strong> ${seasonStatus}</li>
-          <li><strong>🌟 التقييم:</strong> ${rating}</li>
-          <li><strong>🎭 النوع:</strong> ${genres}</li>
-        </ul>
+<div class="details-info-box">
+  <div class="detail-item">
+    <strong>📅 سنة الإصدار</strong>
+    ${releaseYear}
+  </div>
+  <div class="detail-item">
+    <strong>📺 الحالة</strong>
+    ${status}
+  </div>
+  <div class="detail-item">
+    <strong>📌 حالة الموسم</strong>
+    ${seasonStatus}
+  </div>
+  <div class="detail-item">
+    <strong>🌟 التقييم</strong>
+    ${rating}
+  </div>
+  <div class="detail-item">
+    <strong>🎭 النوع</strong>
+    ${genres}
+  </div>
+</div>
 
         <a class="watch-btn" href="${isSeries ? `series.html?id=${movie.id}` : `watch.html?id=${movie.id}`}">▶️ مشاهدة الآن</a>
       </div>
