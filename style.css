@@ -456,3 +456,23 @@ button, .control-btn, .episode-btn {
 .category-buttons .dropdown-menu button:hover {
   background-color: #ff3c00;
 }
+.rating-stars {
+  margin: 6px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-stars img.star {
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.rating-number {
+  font-size: 13px;
+  margin-left: 5px;
+  color: #f0c040;
+  font-weight: bold;
+}
