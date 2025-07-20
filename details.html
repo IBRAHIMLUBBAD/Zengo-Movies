@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <link rel="stylesheet" href="mobile.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>📄 تفاصيل المحتوى</title>
+
+  <!-- روابط CSS -->
+  <link rel="stylesheet" href="mobile.css" />
   <link rel="stylesheet" href="style.css" />
-  <script src="movies.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- سكربت جافاسكربت -->
+  <script src="movies.js" defer></script>
+
   <style>
     body {
       margin: 0;
@@ -114,79 +119,71 @@
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
     }
+
     .details-info-box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 20px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
     }
 
     .detail-item {
-    background-color: #1e1e1e;
-    padding: 10px 16px;
-    border-radius: 10px;
-    color: #ddd;
-    font-size: 15px;
-    min-width: 110px;
-    flex: 1;
-    text-align: center;
-    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+      background-color: #1e1e1e;
+      padding: 10px 16px;
+      border-radius: 10px;
+      color: #ddd;
+      font-size: 15px;
+      min-width: 110px;
+      flex: 1;
+      text-align: center;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
     }
 
     .detail-item strong {
-    display: block;
-    color: #ffc107;
-    font-size: 14px;
-    margin-bottom: 4px;
+      display: block;
+      color: #ffc107;
+      font-size: 14px;
+      margin-bottom: 4px;
     }
-@media (max-width: 768px) {
-        .details-card {
+
+    @media (max-width: 768px) {
+      .details-card {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        }
+      }
 
       .details-content {
         align-items: center;
       }
+
       .details-info-box {
-        display: flex;
-        flex-wrap: wrap;
         gap: 15px;
         margin-bottom: 20px;
-        }
+      }
 
       .detail-item {
-        background-color: #1e1e1e;
         padding: 12px 20px;
-        border-radius: 10px;
-        color: #ddd;
-        font-size: 15px;
         min-width: 120px;
-        flex: 1;
-        text-align: center;
         box-shadow: 0 0 8px rgba(0,0,0,0.3);
-        }
+      }
 
-        .detail-item strong {
-          display: block;
-          color: #f0c040;
-          font-size: 14px;
-          margin-bottom: 4px;
-          }
+      .detail-item strong {
+        color: #f0c040;
+      }
 
       .watch-btn {
         align-self: center;
       }
-}
+    }
   </style>
 </head>
 <body>
 
   <header>
     <div class="container header-container">
-    <h1 class="logo">
-      <a href="index.html" style="text-decoration: none; color: inherit;">🎬 Zingo watch</a>
+      <h1 class="logo">
+        <a href="index.html" style="text-decoration: none; color: inherit;">🎬 Zingo watch</a>
       </h1>
       <nav class="navbar">
         <ul class="nav-links">
@@ -202,78 +199,58 @@
     </div>
   </main>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  const container = document.getElementById("details");
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const container = document.getElementById("details");
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const movie = movies.find(m => m.id === id);
+    document.addEventListener("DOMContentLoaded", () => {
+      const movie = movies.find(m => m.id === id);
 
-    if (!movie) {
-      container.innerHTML = `<p>📛 لم يتم العثور على المحتوى المطلوب.</p>`;
-      return;
-    }
+      if (!movie) {
+        container.innerHTML = `<p>📛 لم يتم العثور على المحتوى المطلوب.</p>`;
+        return;
+      }
 
-    const isSeries = !!movie.seasons;
+      const isSeries = !!movie.seasons;
+      const genres = movie.genres ? movie.genres.join(', ') : 'غير محدد';
+      const status = movie.status === 'completed' ? 'مكتمل' : 'مستمر';
+      const seasonStatus = movie.seasonStatus === 'completed' ? 'الموسم مكتمل' : 'الموسم مستمر';
+      const rating = movie.rating ? `${movie.rating}/10 ⭐` : 'غير مصنّف';
+      const releaseYear = movie.releaseYear || 'غير معروف';
 
-    const genres = movie.genres ? movie.genres.join(', ') : 'غير محدد';
-    const status = movie.status === 'completed' ? 'مكتمل' : 'مستمر';
-    const seasonStatus = movie.seasonStatus === 'completed' ? 'الموسم مكتمل' : 'الموسم مستمر';
-    const rating = movie.rating ? `${movie.rating}/10 ⭐` : 'غير مصنّف';
-    const releaseYear = movie.releaseYear || 'غير معروف';
+      let html = `
+        <img src="${movie.image}" alt="${movie.title}" class="details-poster">
+        <div class="details-content">
+          <h1 class="details-title">${movie.title}</h1>
+          <p class="details-description">${movie.description || "لا يوجد وصف متاح."}</p>
 
-    // HTML الرئيسي
-    let html = `
-      <img src="${movie.image}" alt="${movie.title}" class="details-poster">
-      <div class="details-content">
-        <h1 class="details-title">${movie.title}</h1>
-        <p class="details-description">${movie.description || "لا يوجد وصف متاح."}</p>
-
-<div class="details-info-box">
-  <div class="detail-item">
-    <strong>📅 سنة الإصدار</strong>
-    ${releaseYear}
-  </div>
-  <div class="detail-item">
-    <strong>📺 الحالة</strong>
-    ${status}
-  </div>
-  <div class="detail-item">
-    <strong>📌 حالة الموسم</strong>
-    ${seasonStatus}
-  </div>
-  <div class="detail-item">
-    <strong>🌟 التقييم</strong>
-    ${rating}
-  </div>
-  <div class="detail-item">
-    <strong>🎭 النوع</strong>
-    ${genres}
-  </div>
-</div>
-
-        <a class="watch-btn" href="${isSeries ? `series.html?id=${movie.id}` : `watch.html?id=${movie.id}`}">▶️ مشاهدة الآن</a>
-      </div>
-    `;
-
-    // عرض التريلر إن وجد
-    if (movie.embed) {
-      html += `
-        <div class="trailer-section" style="margin-top: 30px;">
-          <h2 style="color: #fff; font-size: 22px;">🎬 الإعلان التشويقي</h2>
-          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius: 12px; box-shadow: 0 0 10px #000;">
-            <iframe src="${movie.embed}" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+          <div class="details-info-box">
+            <div class="detail-item"><strong>📅 سنة الإصدار</strong>${releaseYear}</div>
+            <div class="detail-item"><strong>📺 الحالة</strong>${status}</div>
+            <div class="detail-item"><strong>📌 حالة الموسم</strong>${seasonStatus}</div>
+            <div class="detail-item"><strong>🌟 التقييم</strong>${rating}</div>
+            <div class="detail-item"><strong>🎭 النوع</strong>${genres}</div>
           </div>
+
+          <a class="watch-btn" href="${isSeries ? `series.html?id=${movie.id}` : `watch.html?id=${movie.id}`}">▶️ مشاهدة الآن</a>
         </div>
       `;
-    }iframe
 
-    container.innerHTML = html;
-  });
-</script>
+      if (movie.embed) {
+        html += `
+          <div class="trailer-section" style="margin-top: 30px;">
+            <h2 style="color: #fff; font-size: 22px;">🎬 الإعلان التشويقي</h2>
+            <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius: 12px; box-shadow: 0 0 10px #000;">
+              <iframe src="${movie.embed}" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+            </div>
+          </div>
+        `;
+      }
 
-
+      container.innerHTML = html;
+    });
+  </script>
 
 </body>
 </html>
