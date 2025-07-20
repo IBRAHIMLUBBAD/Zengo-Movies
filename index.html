@@ -152,6 +152,13 @@
       text-decoration: none;
       font-size: 14px;
     }
+  .movie-rating {
+  font-size: 14px;
+  margin-top: 6px;
+  color: #f0c040;
+  font-weight: bold;
+  text-align: center;
+}
 
     footer {
       background-color: #1f1f1f;
@@ -252,16 +259,24 @@
       });
     }
 
-    function createMovieCard(movie) {
-      const card = document.createElement("div");
-      card.className = "movie-card";
-      const targetLink = details.html?id=${movie.id};
-      const rating = document.createElement("div");
-      rating.className = "movie-rating";
-      rating.textContent = `⭐ ${movie.rating} / 10`;
-      card.appendChild(rating);
-      return card;
-    }
+function createMovieCard(movie) {
+  const card = document.createElement("div");
+  card.className = "movie-card";
+
+  const targetLink = `details.html?id=${movie.id}`;
+
+  card.innerHTML = `
+    <a href="${targetLink}">
+      <img src="${movie.image}" alt="${movie.title}">
+      <h3>${movie.title}</h3>
+    </a>
+    <div class="movie-rating">⭐ ${movie.rating} / 10</div>
+    <a class="watch-btn" href="${targetLink}">تفاصيل</a>
+  `;
+
+  return card;
+}
+
 
     searchInput.addEventListener("input", () => {
       const term = searchInput.value.trim().toLowerCase();
