@@ -252,12 +252,16 @@
       });
     }
 
-const rating = document.createElement("div");
-rating.className = "movie-rating";
-rating.textContent = `⭐ ${movie.rating} / 10`;
-card.appendChild(rating);
-
-
+    function createMovieCard(movie) {
+      const card = document.createElement("div");
+      card.className = "movie-card";
+      const targetLink = details.html?id=${movie.id};
+      const rating = document.createElement("div");
+      rating.className = "movie-rating";
+      rating.textContent = `⭐ ${movie.rating} / 10`;
+      card.appendChild(rating);
+      return card;
+    }
 
     searchInput.addEventListener("input", () => {
       const term = searchInput.value.trim().toLowerCase();
