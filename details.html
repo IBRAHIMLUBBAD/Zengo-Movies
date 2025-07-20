@@ -114,6 +114,33 @@
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
     }
+<style>
+  .details-info-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .detail-item {
+    background-color: #1e1e1e;
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: #ddd;
+    font-size: 15px;
+    min-width: 110px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  }
+
+  .detail-item strong {
+    display: block;
+    color: #ffc107;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+</style>
 
     @media (max-width: 768px) {
       .details-card {
