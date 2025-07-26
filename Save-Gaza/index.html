@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <script src="sw.js"></script>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أنقذوا عائلتي في غزة</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.85)), url('https://images.unsplash.com/photo-1622864352372-a68fa7dac64e?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #ff6b6b;
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.8;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .donate-button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 12px 24px;
+      background-color: #ff6b6b;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .donate-button:hover {
+      background-color: #e63946;
+    }
+
+    .qr {
+      margin-top: 30px;
+    }
+
+    img.qr-code {
+      width: 200px;
+      height: 200px;
+      border: 4px solid #fff;
+      border-radius: 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #ddd;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <button class="lang-toggle" onclick="toggleLanguage()">English</button>
+  <div class="container">
+    <div id="arabic">
+      <h1>💔 أنقذوا عائلتي في غزة</h1>
+      <p>
+        هذه الحملة لمساعدة عائلتي التي تعيش تحت القصف والحصار في غزة. <br>
+        نحتاج دعمكم لتأمين الطعام، المياه، والدواء. <br>
+        كل مساهمة، مهما كانت، تُحدث فرقًا حقيقيًا.
+      </p>
+      <a href="https://gofund.me/f902ab6e" class="donate-button" target="_blank">تبرع الآن عبر GoFundMe</a>
+      <div class="qr">
+        <p>📱 امسح كود QR لفتح الحملة مباشرة:</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://gofund.me/f902ab6e&size=200x200" alt="QR Code" class="qr-code">
+      </div>
+      <footer>
+        تم الإنشاء بواسطة إبراهيم لبد ❤️ باستخدام البرمجة من أجل الخير.
+      </footer>
+    </div>
+
+    <div id="english" style="display: none;" dir="ltr">
+      <h1>💔 Save My Family in Gaza</h1>
+      <p>
+        This campaign is to support my family living under bombardment and siege in Gaza. <br>
+        We need your help to secure food, water, and medicine. <br>
+        Every contribution, no matter how small, makes a real difference.
+      </p>
+      <a href="https://gofund.me/f902ab6e" class="donate-button" target="_blank">Donate Now on GoFundMe</a>
+      <div class="qr">
+        <p>📱 Scan the QR code to open the campaign directly:</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://gofund.me/f902ab6e&size=200x200" alt="QR Code" class="qr-code">
+      </div>
+      <footer>
+        Created by Ibrahim Lubbad ❤️ using programming for good.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    function toggleLanguage() {
+      const ar = document.getElementById('arabic');
+      const en = document.getElementById('english');
+      const btn = document.querySelector('.lang-toggle');
+      if (ar.style.display === 'none') {
+        ar.style.display = 'block';
+        en.style.display = 'none';
+        btn.textContent = 'English';
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      } else {
+        ar.style.display = 'none';
+        en.style.display = 'block';
+        btn.textContent = 'العربية';
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+      }
+    }
+  </script>
+</body>
+</html>
