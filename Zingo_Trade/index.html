@@ -1,1 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Candlestick Analysis</title>
 
+  <!-- ✅ Fonts & Icons -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.2.0/dist/chartjs-chart-financial.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1"></script>
+
+  <!-- Shogun Candlestick plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Zingo Trade</h1>
+                </div>
+                <div class="header-info">
+                    <div class="status-indicator">
+                        <div class="status-dot" id="statusDot"></div>
+                        <span id="connectionStatus">Connecting...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Controls Panel -->
+        <section class="controls-panel">
+            <div class="control-group">
+                <label for="symbolSearch">
+                    <i class="fas fa-search"></i>
+                    Currency Pair
+                </label>
+                <div class="search-container">
+                    <input type="text" id="symbolSearch" placeholder="Search pairs (e.g., BTCUSDT)" value="BTCUSDT">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="timeframe">
+                    <i class="fas fa-clock"></i>
+                    Timeframe
+                </label>
+                <select id="timeframe">
+                    <option value="1m">1 Minute</option>
+                    <option value="5m" selected>5 Minutes</option>
+                    <option value="15m">15 Minutes</option>
+                    <option value="1h">1 Hour</option>
+                    <option value="4h">4 Hours</option>
+                    <option value="1d">1 Day</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="dataLimit">
+                    <i class="fas fa-database"></i>
+                    Data Points
+                </label>
+                <select id="dataLimit">
+                    <option value="50">50</option>
+                    <option value="100" selected>100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label><i class="fas fa-eye"></i> Show Signals</label>
+                <div class="checkbox-options">
+                    <label><input type="checkbox" id="showBuy" checked> Buy</label>
+                    <label><input type="checkbox" id="showSell" checked> Sell</label>
+                    <label><input type="checkbox" id="showDoji" checked> Doji</label>
+                </div>
+            </div>
+
+            <div class="control-actions">
+                <button id="refreshBtn" class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i>
+                    Refresh Data
+                </button>
+                <button id="autoRefreshBtn" class="btn btn-secondary">
+                    <i class="fas fa-play"></i>
+                    Auto Refresh
+                </button>
+            </div>
+        </section>
+
+<!-- Chart Section -->
+<section class="chart-section">
+  <div class="section-header">
+    <h2>
+      <i class="fas fa-chart-candlestick"></i>
+      Interactive Candlestick Chart
+    </h2>
+    <div class="chart-info">
+      <span id="currentPrice">--</span>
+      <span id="priceChange" class="price-change">--</span>
+    </div>
+  </div>
+  
+<div class="chart-toolbar">
+  <button id="fullscreenBtn" class="btn fullscreen-toggle">
+    <i class="fas fa-expand"></i> Fullscreen
+  </button>
+</div>
+
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
+
+    <div class="chart-loading" id="chartLoading">
+      <i class="fas fa-spinner fa-spin"></i>
+      <span>Loading chart data...</span>
+    </div>
+  </div>
+</section>
+
+
+        <!-- Analysis Section -->
+        <section class="analysis-section">
+            <div class="section-header">
+                <h2>
+                    <i class="fas fa-brain"></i>
+                    Pattern Analysis & Signals
+                </h2>
+                <div class="analysis-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Patterns Found:</span>
+                        <span id="patternsCount" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Buy Signals:</span>
+                        <span id="buySignals" class="stat-value buy">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Sell Signals:</span>
+                        <span id="sellSignals" class="stat-value sell">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="patterns-table-container">
+                <table class="patterns-table" id="patternsTable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Pattern</th>
+                            <th>Signal</th>
+                            <th>Confidence</th>
+                            <th>Open</th>
+                            <th>High</th>
+                            <th>Low</th>
+                            <th>Close</th>
+                            <th>Volume</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patternsTableBody">
+                        <tr class="no-data">
+                            <td colspan="9">
+                                <i class="fas fa-search"></i>
+                                No patterns detected yet. Click "Refresh Data" to analyze.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Pattern Legend -->
+        <section class="legend-section">
+            <div class="section-header">
+                <h3>
+                    <i class="fas fa-info-circle"></i>
+                    Pattern Legend
+                </h3>
+            </div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color bullish"></div>
+                    <div class="legend-info">
+                        <strong>Hammer</strong>
+                        <span>Bullish reversal pattern with small body and long lower shadow</span>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color bullish"></div>
+                    <div class="legend-info">
+                        <strong>Bullish Engulfing</strong>
+                        <span>Large bullish candle completely engulfs previous bearish candle</span>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color bearish"></div>
+                    <div class="legend-info">
+                        <strong>Bearish Engulfing</strong>
+                        <span>Large bearish candle completely engulfs previous bullish candle</span>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color neutral"></div>
+                    <div class="legend-info">
+                        <strong>Doji</strong>
+                        <span>Indecision pattern where open and close prices are nearly equal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
